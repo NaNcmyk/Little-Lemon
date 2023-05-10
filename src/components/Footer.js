@@ -1,57 +1,67 @@
+import restaurant from '../assets/restaurant.jpg'
+
+const generalLinks = ["home", "about", "menu", "reservations", "order online", "log in"];
+const contactLinks = ["address", "phone number", "email"];
+const socialLinks = ["instagram", "facebook", "twitter", "tiktok"];
+
 const Footer = () => {
     return (
         <footer>
-            <ul>
-                <li>
-                    <a href=''>home</a>
-                </li>
-                <li>
-                    <a href=''>about</a>
-                </li>
-                <li>
-                    <a href=''>menu</a>
-                </li>
-                <li>
-                    <a href=''>reservations</a>
-                </li>
-                <li>
-                    <a href=''>order online</a>
-                </li>
-                <li>
-                    <a href=''>log in</a>
-                </li>
-            </ul>
+            <div className="footer-container">
 
-            <h4>contact</h4>
-            <ul>
-                <li>
-                    <a href=''>address</a>
-                </li>
-                <li>
-                    <a href=''>phone number</a>
-                </li>
-                <li>
-                    <a href=''>email</a>
-                </li>
-            </ul>
+                <img src={restaurant} alt="restaurant" />
 
-            <h4>social media</h4>
-            <ul>
-                <li>
-                    <a href=''>instagram</a>
-                </li>
-                <li>
-                    <a href=''>facebook</a>
-                </li>
-                <li>
-                    <a href=''>twitter</a>
-                </li>
-                <li>
-                    <a href=''>tiktok</a>
-                </li>
-            </ul>
+                <div className='footer-links-groups'>
+                    {/* GROUP 1 ///////////////////////////// */}
+                    <div className="footer-links-group">
+                        <ul>
+                            {
+                                generalLinks.map((data, i) => {
+                                    return (
+                                        <li key={i}>
+                                            <a href='/'>{data}</a>
+                                        </li>
+                                    );
+                                })
+                            }
+                        </ul>
+                    </div>
 
-          
+                    {/* GROUP 2 ///////////////////////////// */}
+                    <div className="footer-links-group">
+                        <h4>contact</h4>
+                        <ul>
+                            {
+                                contactLinks.map((data, i) => {
+                                    return (
+                                        <li key={i}>
+                                            <a href='/'>{data}</a>
+                                        </li>
+                                    );
+                                })
+                            }
+                        </ul>
+                    </div>
+
+                    {/* GROUP 3 ///////////////////////////// */}
+                    <div className="footer-links-group">
+                        <h4>social media</h4>
+                        <ul>
+                            {
+                                socialLinks.map((data, i) => {
+                                    return (
+                                        <li key={i}>
+                                            <a href='/'>{data}</a>
+                                        </li>
+                                    );
+                                })
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <small>&#169; {new Date().getFullYear()} <span>🍋 Little Lemon</span></small>
         </footer>
     );
 }

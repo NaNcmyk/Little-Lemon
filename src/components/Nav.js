@@ -1,28 +1,25 @@
+import logo from '../assets/logo.png';
+
+const navInfo = ["home", "about", "menu", "reservations", "order online", "log in"]
+
 const Nav = () => {
     return (
-        <nav>
-            <img src='./assets/logo.png' alt='logo' />
-            <ul>
-                <li>
-                    <a href=''>home</a>
-                </li>
-                <li>
-                    <a href=''>about</a>
-                </li>
-                <li>
-                    <a href=''>menu</a>
-                </li>
-                <li>
-                    <a href=''>reservations</a>
-                </li>
-                <li>
-                    <a href=''>order online</a>
-                </li>
-                <li>
-                    <a href=''>log in</a>
-                </li>
-            </ul>
-        </nav>
+        <header>
+            <nav className='nav-container'>
+                <img src={ logo } alt='logo' />
+                <ul className='nav-links'>
+                    {
+                        navInfo.map((data, i) => {
+                            return (
+                                <li key={ i }>
+                                    <a href='/'>{ data }</a>
+                                </li>
+                            );
+                        })
+                    }
+                </ul>
+            </nav>
+        </header>
     );
 }
 
