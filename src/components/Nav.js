@@ -1,18 +1,20 @@
-import logo from '../assets/logo.png';
+import logo from "../assets/logo.png";
+import { Link } from 'react-router-dom';
 
-const navInfo = ["home", "about", "menu", "reservations", "order online", "log in"]
+const navInfo = ["home", "about", "menu", "reservations", "order online", "log in"];
+const navRoutes = ["/", "/about", "/under-construction", "/booking", "/under-construction", "/under-construction"];
 
 const Nav = () => {
     return (
-        <header>
-            <nav className='nav-container'>
-                <img src={ logo } alt='logo' />
-                <ul className='nav-links'>
+        <header className="section">
+            <nav className="nav-container content-wrapper">
+                <img src={logo} alt="logo" />
+                <ul className="nav-links">
                     {
                         navInfo.map((data, i) => {
                             return (
-                                <li key={ i }>
-                                    <a href='/'>{ data }</a>
+                                <li key={i}>
+                                    <Link to={ navRoutes[i] }>{data}</Link>
                                 </li>
                             );
                         })
