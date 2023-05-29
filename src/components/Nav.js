@@ -1,5 +1,6 @@
 import logo from "../assets/logo.png";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { CgClose, CgMenu } from "react-icons/cg"
 
 const navInfo = ["home", "about", "menu", "reservations", "order online", "log in"];
 const navRoutes = ["/", "/about", "/under-construction", "/booking", "/under-construction", "/under-construction"];

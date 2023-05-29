@@ -37,7 +37,7 @@ const Specials = () => {
                         cardData.map(data => {
                             const { img, dish, price, description } = data;
                             return (
-                                <article className="specials-card">
+                                <article key={dish} className="specials-card">
 
                                     <img src={ img } alt={ dish } />
 
