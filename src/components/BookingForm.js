@@ -16,6 +16,16 @@ const availableTimes = (state, action) => {
     }
 }
 
+const BookingSlots = ({ bookingData, initializeTimes }) => {
+    return <>
+        {
+            bookingData.length > 0 ?
+            bookingData.map(time => <option key={time}>{time}</option>) :
+            initializeTimes(new Date())
+        }
+    </>
+}
+
 const BookingForm = () => {
     const navigate = useNavigate();
 
@@ -164,6 +174,7 @@ const BookingForm = () => {
                     <label htmlFor="res-date">Choose date<sup>*</sup></label>
                     <div className="form-required-field">
                         <input
+                            data-testid="res-date"
                             id="res-date"
                             onChange={handleDateChange}
                             type="date"
@@ -179,7 +190,6 @@ const BookingForm = () => {
                     <div className="form-required-field">
                         <select
                             className={(isTouched.time && !isInputValid(form.time)) ? "invalid-input" : undefined}
-                            data-testid="test-element"
                             id="res-time"
                             onChange={e => {
                                 setForm({
@@ -194,11 +204,7 @@ const BookingForm = () => {
                             value={form.time}
                             required
                         >
-                            {
-                                bookingData.length > 0 ?
-                                    bookingData.map(time => <option key={time}>{time}</option>) :
-                                    initializeTimes(new Date())
-                            }
+                            <BookingSlots initializeTimes={initializeTimes} bookingData={bookingData} />
                         </select>
                         {(isTouched.time && !isInputValid(form.time)) && <p className="error-msg">⚠️ Please select a time from the dropdown.</p>}
                     </div>
@@ -271,4 +277,4 @@ const BookingForm = () => {
     );
 }
 
-export default BookingForm;
+export { BookingForm, BookingSlots, availableTimes };
