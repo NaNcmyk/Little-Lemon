@@ -1,6 +1,6 @@
-import { useState, useReducer } from 'react';
+import { useState, useReducer, useEffect } from 'react';
 import { fetchAPI, submitAPI } from "../api.js";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { isFormValid, isInputValid, validateEmail } from '../formValidation.js';
 
 const availableTimes = (state, action) => {
@@ -20,8 +20,8 @@ const BookingSlots = ({ bookingData, initializeTimes }) => {
     return <>
         {
             bookingData.length > 0 ?
-            bookingData.map(time => <option key={time}>{time}</option>) :
-            initializeTimes(new Date())
+                bookingData.map(time => <option key={time}>{time}</option>) :
+                initializeTimes(new Date())
         }
     </>
 }
@@ -34,16 +34,34 @@ const BookingForm = () => {
         []
     );
 
-    const [form, setForm] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        date: `${new Date().getFullYear()}-${new Date().getMonth() < 10 ? `0${(new Date().getMonth() + 1)}` : (new Date().getMonth() + 1)}-${new Date().getDate()}`,
-        time: "",
-        guests: 2,
-        occasion: "",
-        isTermsChecked: false
+    const [form, setForm] = useState(() => {
+        const form = JSON.parse(localStorage.getItem("form"));
+        if (form) {
+            // previously selected time may no longer be available
+            // if unavailable - override localStorage empty string value to keep submit button disabled
+            // if available - keep as is
+            return {
+                ...form,
+                date: // revert to default date (today) if user clears date input before navigating away from page, override empty string
+                    form.date === "" ?
+                    `${new Date().getFullYear()}-${new Date().getMonth() < 10 ? `0${(new Date().getMonth() + 1)}` : (new Date().getMonth() + 1)}-${new Date().getDate()}` :
+                    form.date,
+                time: form.time || ""
+            };
+        } else {
+            return {
+                firstName: "",
+                lastName: "",
+                email: "",
+                date: `${new Date().getFullYear()}-${new Date().getMonth() < 10 ? `0${(new Date().getMonth() + 1)}` : (new Date().getMonth() + 1)}-${new Date().getDate()}`,
+                time: "",
+                guests: 2,
+                occasion: ""
+            };
+        }
     });
+
+    const [isTermsChecked, setIsTermsChecked] = useState(false);
 
     const [isTouched, setIsTouched] = useState({
         firstName: false,
@@ -52,6 +70,12 @@ const BookingForm = () => {
         time: false
     });
 
+    // set up localStorage ///////////////////////////////
+    useEffect(() => {
+        localStorage.setItem("form", JSON.stringify(form));
+    }, [form]);
+
+    // DISPATCH FUNCTIONS ///////////////////////////////
     const initializeTimes = (date) => {
         dispatch({
             type: "initialize",
@@ -66,12 +90,14 @@ const BookingForm = () => {
         })
     }
 
+    // EVENT HANDLERS /////////////////////////////
     const submitForm = (form) => {
         submitAPI(form) && navigate("/confirmed-booking", { state: form });
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        localStorage.clear();
         submitForm(form);
         console.log(form);
     }
@@ -101,6 +127,7 @@ const BookingForm = () => {
                             data-testid="res-fname"
                             id="res-fname"
                             minLength="1"
+                            name="res-fname"
                             onChange={e => {
                                 setForm({
                                     ...form,
@@ -127,6 +154,7 @@ const BookingForm = () => {
                             data-testid="res-lname"
                             id="res-lname"
                             minLength="1"
+                            name="res-lname"
                             onChange={e => {
                                 setForm({
                                     ...form,
@@ -153,6 +181,7 @@ const BookingForm = () => {
                             className={(isTouched.email && !validateEmail(form.email)) ? "invalid-input" : undefined}
                             data-testid="res-email"
                             id="res-email"
+                            name="res-email"
                             onChange={e => {
                                 setForm({
                                     ...form,
@@ -179,6 +208,7 @@ const BookingForm = () => {
                         <input
                             data-testid="res-date"
                             id="res-date"
+                            name="res-date"
                             onChange={handleDateChange}
                             type="date"
                             value={form.date}
@@ -195,6 +225,7 @@ const BookingForm = () => {
                             className={(isTouched.time && !isInputValid(form.time)) ? "invalid-input" : undefined}
                             data-testid="res-time"
                             id="res-time"
+                            name="res-time"
                             onChange={e => {
                                 setForm({
                                     ...form,
@@ -221,6 +252,7 @@ const BookingForm = () => {
                         <input
                             data-testid="res-guests"
                             id="guests"
+                            name="guests"
                             onChange={e => {
                                 setForm({
                                     ...form,
@@ -242,6 +274,7 @@ const BookingForm = () => {
                     <label htmlFor="occasion">Occasion</label>
                     <select
                         id="occasion"
+                        name="occasion"
                         onChange={e => {
                             setForm({
                                 ...form,
@@ -262,12 +295,13 @@ const BookingForm = () => {
                     <input
                         data-testid="res-terms"
                         id="res-terms"
-                        onChange={() => setForm({ ...form, isTermsChecked: !form.isTermsChecked })}
+                        name="res-terms"
+                        onChange={() => setIsTermsChecked(!isTermsChecked)}
                         type="checkbox"
-                        value={form.isTermsChecked}
+                        value={isTermsChecked}
                         required
                     />
-                    <label htmlFor="res-terms">I agree to terms & conditions.<sup>*</sup></label>
+                    <label htmlFor="res-terms">I agree to <Link to="/terms">terms & conditions.</Link><sup>*</sup></label>
                 </div>
 
             </div>
@@ -275,10 +309,10 @@ const BookingForm = () => {
             <input
                 aria-label="On Click"
                 data-testid="res-submit"
-                title={isFormValid(form) ? "Submit form." : "Please complete all required fields."}
+                title={isFormValid(form, isTermsChecked) ? "Submit form." : "Please complete all required fields."}
                 type="submit"
                 value="Book Table"
-                disabled={!isFormValid(form)}
+                disabled={!isFormValid(form, isTermsChecked)}
             />
         </form>
     );

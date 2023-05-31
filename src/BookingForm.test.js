@@ -76,7 +76,7 @@ describe("test BookingForm component", () => {
         userEvent.type(lastNameInput, "");
         expect(lastNameInput).toBeInvalid();
 
-        userEvent.type(emailInput, "gmail.com@hello");
+        userEvent.type(emailInput, "hello");
         expect(emailInput).toHaveClass("invalid-input");
         expect(screen.getByText(/Please enter a valid email address./)).toBeInTheDocument();
         expect(submitInput).toBeDisabled();

@@ -2,6 +2,7 @@ import Homepage from "./Homepage";
 import BookingPage from "./BookingPage";
 import About from "./About";
 import WIP from "./WIP";
+import Terms from "./Terms";
 import ConfirmedBooking from "./ConfirmedBooking";
 import { Routes, Route } from "react-router-dom";
 
@@ -13,6 +14,7 @@ const Routing = () => {
         <Route path="/booking" element={ <BookingPage /> }></Route>
         <Route path="/under-construction" element= { <WIP /> }></Route>
         <Route path="/confirmed-booking" element= { <ConfirmedBooking /> }></Route>
+        <Route path="/terms" element= { <Terms /> }></Route>
     </Routes>
     )
 }

@@ -7,13 +7,13 @@ const validateEmail = (email) => {
       );
 };
 
-const isFormValid = (form) => {
+const isFormValid = (form, isTermsChecked) => {
     return (
       form.firstName &&
       form.lastName &&
       validateEmail(form.email) &&
       form.time &&
-      form.isTermsChecked
+      isTermsChecked
     );
 };
 

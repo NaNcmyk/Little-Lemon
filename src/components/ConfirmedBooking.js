@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { TbCalendarPlus, TbUsers } from "react-icons/tb";
 import { AiOutlineCalendar, AiOutlineClockCircle } from "react-icons/ai";
 
@@ -71,7 +71,9 @@ const ConfirmedBooking = () => {
                 </div>
 
                 <div className="confirmation-terms">
-                    <a href="/under-construction">cancellation policy</a>
+                    <Link to="/terms/#cancellation-policy">
+                        cancellation policy
+                    </Link>
                     <a href="/under-construction">manage booking</a>
                 </div>
 

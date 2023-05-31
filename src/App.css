@@ -582,3 +582,26 @@ footer span {
 .confirmation-container .content-wrapper .confirmation-terms a {
   color: #fff;
 }
+
+/* TERMS & CONDITIONS /////////////////// */
+.terms-container {
+  background-color: var(--primary-green);
+  color: #fff;
+  padding-block: 10em 5em;
+  min-height: 100vh;
+}
+
+.terms-container .content-wrapper {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3em;
+}
+
+.terms-container .content-wrapper > article {
+  width: 70%;
+}
+
+.terms-container .content-wrapper > article a {
+  color: var(--primary-yellow);
+}

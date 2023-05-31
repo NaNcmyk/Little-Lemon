@@ -5,7 +5,7 @@ const generalLinks = ["home", "about", "menu", "reservations", "order online", "
 const generalRoutes = ["/", "/about", "/under-construction", "/booking", "/under-construction", "/under-construction"]
 
 const contactLinks = ["address", "phone number", "email"];
-const contactData = ["https://goo.gl/maps/RRd65pdnBsFnzdDi8", "tel:3125275586", "mailto:hello@littlelemon.com?subject=Hello 😀"]
+const contactData = ["https://goo.gl/maps/RRd65pdnBsFnzdDi8", "tel:3125275586", "mailto:reservations@littlelemon.com?subject=Hello 😀"]
 
 const socialLinks = ["instagram", "facebook", "twitter", "tiktok"];
 
