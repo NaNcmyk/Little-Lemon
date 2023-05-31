@@ -98,6 +98,7 @@ const BookingForm = () => {
                     <div className="form-required-field">
                         <input
                             className={(isTouched.firstName && !isInputValid(form.firstName)) ? "invalid-input" : undefined}
+                            data-testid="res-fname"
                             id="res-fname"
                             minLength="1"
                             onChange={e => {
@@ -123,6 +124,7 @@ const BookingForm = () => {
                     <div className="form-required-field">
                         <input
                             className={(isTouched.lastName && !isInputValid(form.lastName)) ? "invalid-input" : undefined}
+                            data-testid="res-lname"
                             id="res-lname"
                             minLength="1"
                             onChange={e => {
@@ -149,6 +151,7 @@ const BookingForm = () => {
                     <div className="form-required-field">
                         <input
                             className={(isTouched.email && !validateEmail(form.email)) ? "invalid-input" : undefined}
+                            data-testid="res-email"
                             id="res-email"
                             onChange={e => {
                                 setForm({
@@ -190,6 +193,7 @@ const BookingForm = () => {
                     <div className="form-required-field">
                         <select
                             className={(isTouched.time && !isInputValid(form.time)) ? "invalid-input" : undefined}
+                            data-testid="res-time"
                             id="res-time"
                             onChange={e => {
                                 setForm({
@@ -215,6 +219,7 @@ const BookingForm = () => {
                     <label htmlFor="guests">Number of guests<sup>*</sup></label>
                     <div className="form-required-field">
                         <input
+                            data-testid="res-guests"
                             id="guests"
                             onChange={e => {
                                 setForm({
@@ -255,6 +260,7 @@ const BookingForm = () => {
                 {/* terms & conditions  ////////////////////////////*/}
                 <div className="form-field form-terms">
                     <input
+                        data-testid="res-terms"
                         id="res-terms"
                         onChange={() => setForm({ ...form, isTermsChecked: !form.isTermsChecked })}
                         type="checkbox"
@@ -268,6 +274,7 @@ const BookingForm = () => {
 
             <input
                 aria-label="On Click"
+                data-testid="res-submit"
                 title={isFormValid(form) ? "Submit form." : "Please complete all required fields."}
                 type="submit"
                 value="Book Table"
