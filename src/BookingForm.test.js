@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { BookingForm, BookingSlots, availableTimes } from "./components/BookingForm";
+import { BookingForm, availableTimes, BookingSlots } from "./components/booking/BookingForm";
 import { fetchAPI } from "./api";
 import { BrowserRouter } from 'react-router-dom';
 

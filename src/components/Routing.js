@@ -1,9 +1,9 @@
-import Homepage from "./Homepage";
-import BookingPage from "./BookingPage";
-import About from "./About";
+import Homepage from "./homepage/Homepage";
+import BookingPage from "./booking/BookingPage";
+import About from "./homepage/About";
 import WIP from "./WIP";
-import Terms from "./Terms";
-import ConfirmedBooking from "./ConfirmedBooking";
+import Terms from "./booking/Terms";
+import ConfirmedBooking from "./booking/ConfirmedBooking";
 import { Routes, Route } from "react-router-dom";
 
 const Routing = () => {

@@ -1,7 +1,8 @@
 import { useState, useReducer, useEffect } from 'react';
-import { fetchAPI, submitAPI } from "../api.js";
+import { fetchAPI, submitAPI } from "../../api.js";
 import { useNavigate, Link } from 'react-router-dom';
-import { isFormValid, isInputValid, validateEmail } from '../formValidation.js';
+import { isFormValid, isInputValid, validateEmail } from '../../formValidation.js';
+import { getTodaysDate } from '../../utils.js';
 
 const availableTimes = (state, action) => {
     switch (action.type) {
@@ -17,12 +18,14 @@ const availableTimes = (state, action) => {
 }
 
 const BookingSlots = ({ bookingData, initializeTimes }) => {
-    return <>
-        {
-            bookingData.length > 0 ?
-                bookingData.map(time => <option key={time}>{time}</option>) :
-                initializeTimes(new Date())
+    // wrapping initializeTimes inside useEffect resolves "cannot update a component while rendering a different component" error
+    useEffect(() => {
+        if (bookingData.length === 0) {
+            initializeTimes(new Date());
         }
+    });
+    return <>
+        {bookingData.map(time => <option key={time}>{time}</option>)}
     </>
 }
 
@@ -36,6 +39,7 @@ const BookingForm = () => {
 
     const [form, setForm] = useState(() => {
         const form = JSON.parse(localStorage.getItem("form"));
+        const today = getTodaysDate();
         if (form) {
             // previously selected time may no longer be available
             // if unavailable - override localStorage empty string value to keep submit button disabled
@@ -43,17 +47,16 @@ const BookingForm = () => {
             return {
                 ...form,
                 date: // revert to default date (today) if user clears date input before navigating away from page, override empty string
-                    form.date === "" ?
-                    `${new Date().getFullYear()}-${new Date().getMonth() < 10 ? `0${(new Date().getMonth() + 1)}` : (new Date().getMonth() + 1)}-${new Date().getDate()}` :
-                    form.date,
-                time: form.time || ""
+                    form.date === "" ? today : form.date,
+                time:
+                    form.time || ""
             };
         } else {
             return {
                 firstName: "",
                 lastName: "",
                 email: "",
-                date: `${new Date().getFullYear()}-${new Date().getMonth() < 10 ? `0${(new Date().getMonth() + 1)}` : (new Date().getMonth() + 1)}-${new Date().getDate()}`,
+                date: today,
                 time: "",
                 guests: 2,
                 occasion: ""
@@ -239,7 +242,7 @@ const BookingForm = () => {
                             value={form.time}
                             required
                         >
-                            <BookingSlots initializeTimes={initializeTimes} bookingData={bookingData} />
+                            <BookingSlots bookingData={bookingData} initializeTimes={initializeTimes} /> :
                         </select>
                         {(isTouched.time && !isInputValid(form.time)) && <p className="error-msg">⚠️ Please select a time from the dropdown.</p>}
                     </div>
@@ -304,18 +307,17 @@ const BookingForm = () => {
                     <label htmlFor="res-terms">I agree to <Link to="/terms">terms & conditions.</Link><sup>*</sup></label>
                 </div>
 
+                <input
+                    aria-label="On Click"
+                    data-testid="res-submit"
+                    title={isFormValid(form, isTermsChecked) ? "Submit form." : "Please complete all required fields."}
+                    type="submit"
+                    value="Book Table"
+                    disabled={!isFormValid(form, isTermsChecked)}
+                />
             </div>
-
-            <input
-                aria-label="On Click"
-                data-testid="res-submit"
-                title={isFormValid(form, isTermsChecked) ? "Submit form." : "Please complete all required fields."}
-                type="submit"
-                value="Book Table"
-                disabled={!isFormValid(form, isTermsChecked)}
-            />
         </form>
     );
 }
 
-export { BookingForm, BookingSlots, availableTimes };
+export { BookingForm, availableTimes, BookingSlots };

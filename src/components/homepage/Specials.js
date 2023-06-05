@@ -1,6 +1,6 @@
-import greekSalad from "../assets/greek_salad.jpg";
-import bruschetta from "../assets/bruschetta.jpeg";
-import dessert from "../assets/dessert.jpg";
+import greekSalad from "../../assets/greek_salad.jpg";
+import bruschetta from "../../assets/bruschetta.jpeg";
+import dessert from "../../assets/dessert.jpg";
 import { Link } from "react-router-dom";
 
 const cardData = [
@@ -41,7 +41,7 @@ const Specials = () => {
 
                                     <img src={ img } alt={ dish } />
 
-                                    <div>
+                                    <div className="specials-card-content">
                                         <div className="specials-card-heading">
                                             <h4>{ dish }</h4>
                                             <p>{ price }</p>
