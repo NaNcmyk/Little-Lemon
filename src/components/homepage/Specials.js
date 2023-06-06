@@ -30,7 +30,7 @@ const Specials = () => {
             <div className="content-wrapper">
                 <div className="specials-heading">
                     <h2>This Week's Specials!</h2>
-                    <button><Link to="/under-construction">Online Menu</Link></button>
+                    <button><Link to="/under-construction/menu">Online Menu</Link></button>
                 </div>
                 <div className="specials-cards">
                     {
@@ -51,7 +51,7 @@ const Specials = () => {
                                     </div>
 
                                     <div>
-                                        <Link to="/under-construction">Order delivery</Link>
+                                        <Link to="/under-construction/delivery">Order delivery</Link>
                                     </div>
                                 </article>
                             );

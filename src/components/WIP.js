@@ -2,13 +2,28 @@ import restaurant from "../assets/restaurant.jpg";
 import greekSalad from "../assets/greek_salad.jpg";
 import bruschetta from "../assets/bruschetta.jpeg";
 import chef from "../assets/chef2.jpg";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
+// placeholder page for all pages "under development"
 const WIP = () => {
+    const { pageID } = useParams();
+
     const images = [restaurant, greekSalad, bruschetta, chef];
-    let randomImage = images[Math.floor(Math.random() * images.length)];
+    const [currentBgImg, setCurrentBgImg] = useState(images[0]);
+    const [currentPageID, setPageID] = useState(pageID);
+
+    // change background image when user navigates to /under-construction page via a different link
+    // to simulate "page change"
+    if (pageID !== currentPageID) {
+        setPageID(pageID);
+        const newImages = images.filter(img => img !== currentBgImg);
+        let newRandomImage = newImages[Math.floor(Math.random() * newImages.length)];
+        setCurrentBgImg(newRandomImage);
+    }
 
     const bgImageStyles = {
-        backgroundImage: `url(${randomImage})`,
+        backgroundImage: `url(${currentBgImg})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundBlendMode: "soft-light"

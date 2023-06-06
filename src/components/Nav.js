@@ -4,7 +4,7 @@ import { CgClose, CgMenu } from "react-icons/cg";
 import { useEffect, useState } from "react";
 
 const navInfo = ["home", "about", "menu", "reservations", "order online", "log in"];
-const navRoutes = ["/", "/about", "/under-construction", "/booking", "/under-construction", "/under-construction"];
+const navRoutes = ["/", "/about", "/under-construction/menu", "/booking", "/under-construction/order-online", "/under-construction/login"];
 
 const NavDrawerToggle = ({ showMenu, handleToggle }) => {
     if (showMenu) {
