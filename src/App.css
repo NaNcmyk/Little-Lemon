@@ -22,7 +22,8 @@ body {
   line-height: 1.5;
 }
 
-.section {
+.section,
+header {
   width: 100%;
   background-color: #fff;
 }
@@ -193,69 +194,80 @@ sup {
 }
 
 /* NAV ///////////////////////////////////////////// */
-header.section {
-  padding-block: 1.2em;
+header {
   position: fixed;
   top: 0;
+  padding-block: 1.2em;
   z-index: 100;
 }
 
-.nav-container {
-  flex-direction: column;
-  gap: 2em;
+header>.nav-container {
+  display: flex;
+  justify-content: center;
 }
 
-.nav-container .nav-logo {
-  width: 100%;
+.nav-links a,
+.nav-links-drawer a {
+  font-weight: bold;
+}
+
+.nav-container>.nav-items {
+  width: 80%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 2em;
+  background-color: #fff;
 }
 
-.nav-container .nav-logo img {
+.nav-container .nav-items img {
   width: 10em;
 }
 
-.nav-container .nav-menu-toggle>.nav-toggle {
-  transition: all 5s ease-in-out;
-}
-
-.nav-container .nav-menu-toggle {
+/* SMALL SCREEN navbar ------------------ */
+.nav-container .nav-items .nav-menu-toggle {
   display: flex;
   padding: 0;
   background-color: transparent;
   font-size: 3rem;
+  /* set pre-transition animation state */
+  transform: rotate(0deg);
+  transition: all 0.5s ease-out;
 }
 
-.nav-container .nav-links {
+.nav-container .nav-menu-toggle.active {
+  transform: rotate(180deg);
+}
+
+.nav-links-drawer {
   display: flex;
-  gap: 1em;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav-links.nav-close {
-  display: none;
-}
-
-.nav-links.nav-expand {
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 1em;
+  background-color: #fff;
+  /* set pre-transition animation state */
+  height: 0;
+  opacity: 0;
+  transform: translateY(-80em);
+  transition: all 0.8s ease-out;
+  position: relative;
+  z-index: -1;
+}
+
+.nav-links-drawer.active {
+  margin-top: 2em;
   height: 50vh;
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.nav-container .nav-links.nav-hidden {
-  display: none;
-}
-
-.nav-links a {
-  font-weight: bold;
-  transition: color 0.5s ease-in-out;
-}
-
-.nav-glow {
-  border-bottom: 0.5px solid var(--primary-yellow);
+/* DESKTOP navbar ----------------------- */
+.nav-container .nav-items .nav-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
 }
 
 /* HERO ///////////////////////////////////////// */
@@ -475,6 +487,7 @@ footer.section {
 .booking-container {
   padding-top: 10em;
   padding-bottom: 5em;
+  background-color: whitesmoke;
 }
 
 .booking-container .content-wrapper {
@@ -630,6 +643,10 @@ footer.section {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .nav-items,
+  .content-wrapper {
     width: 90%;
   }
 
@@ -835,14 +852,6 @@ footer.section {
   .section {
     padding-left: 4em;
     padding-right: 4em;
-  }
-
-  .nav-container .nav-links.nav-hidden {
-    display: flex;
-  }
-
-  .nav-container .nav-menu-toggle {
-    display: none;
   }
 
   .specials-cards .specials-card {
