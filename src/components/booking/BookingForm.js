@@ -308,7 +308,7 @@ const BookingForm = () => {
                 </div>
 
                 <input
-                    aria-label="On Click"
+                    aria-label="Submit form."
                     data-testid="res-submit"
                     title={isFormValid(form, isTermsChecked) ? "Submit form." : "Please complete all required fields."}
                     type="submit"

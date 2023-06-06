@@ -6,14 +6,47 @@ import { useEffect, useState } from "react";
 const navInfo = ["home", "about", "menu", "reservations", "order online", "log in"];
 const navRoutes = ["/", "/about", "/under-construction", "/booking", "/under-construction", "/under-construction"];
 
-const NavDrawer = ({ expanded, isDesktop, handleClose }) => {
+const NavDrawerToggle = ({ showMenu, handleToggle }) => {
+    if (showMenu) {
+        return (
+            <button
+                aria-label="close navigation"
+                aria-expanded="true"
+                className="nav-menu-toggle active"
+                onClick={handleToggle}
+            >
+                <CgClose aria-hidden="true" />
+            </button>
+        );
+    } else {
+        return (
+            <button
+                aria-controls="nav-links-list"
+                aria-label="open navigation"
+                aria-expanded="false"
+                className="nav-menu-toggle"
+                onClick={handleToggle}
+            >
+                <CgMenu aria-hidden="true" />
+            </button>
+        );
+    }
+}
+
+
+const NavDrawer = ({ expanded, isDesktop, closeMenu }) => {
     return (
-        <ul className={(expanded && !isDesktop) ? "nav-links-drawer active" : "nav-links-drawer"}>
+        <ul
+            role="navigation"
+            aria-label="Main"
+            id="nav-links-list"
+            className={(expanded && !isDesktop) ? "nav-links-drawer active" : "nav-links-drawer"}
+        >
             {
                 navInfo.map((data, i) => {
                     return (
                         <li key={i}>
-                            <Link onClick={handleClose} to={navRoutes[i]}>{data}</Link>
+                            <Link onClick={closeMenu} to={navRoutes[i]}>{data}</Link>
                         </li>
                     );
                 })
@@ -22,9 +55,10 @@ const NavDrawer = ({ expanded, isDesktop, handleClose }) => {
     );
 }
 
-const NavBarItems = ({ expanded, isDesktop, handleClick }) => {
+
+const NavBarItems = ({ expanded, isDesktop, handleToggle }) => {
     return (
-        <nav className="nav-container">
+        <nav className="nav-container" aria-label="Main">
             <div className="nav-items">
                 <img src={logo} alt="logo" />
                 {
@@ -41,9 +75,7 @@ const NavBarItems = ({ expanded, isDesktop, handleClick }) => {
                             }
                         </ul>
                         :
-                        <button className={(expanded && !isDesktop) ? "nav-menu-toggle active" : "nav-menu-toggle"} onClick={handleClick}>
-                            {(expanded && !isDesktop) ? <CgClose /> : <CgMenu />}
-                        </button>
+                        <NavDrawerToggle showMenu={expanded} handleToggle={handleToggle} />
                 }
             </div>
         </nav>
@@ -55,7 +87,7 @@ const Nav = () => {
     const [expanded, setExpanded] = useState(false);
 
     const handleToggle = () => setExpanded(!expanded);
-    const handleClose = () => setExpanded(false);
+    const closeMenu = () => setExpanded(false);
 
     const isDesktop = () => {
         if (window.innerWidth >= 1200) {
@@ -86,8 +118,8 @@ const Nav = () => {
 
     return (
         <header>
-            <NavBarItems isDesktop={isLargeScreen} expanded={expanded} handleClick={handleToggle} />
-            <NavDrawer expanded={expanded} isDesktop={isLargeScreen} handleClose={handleClose} />
+            <NavBarItems isDesktop={isLargeScreen} expanded={expanded} handleToggle={handleToggle} />
+            <NavDrawer expanded={expanded} isDesktop={isLargeScreen} closeMenu={closeMenu} />
         </header>
     );
 }

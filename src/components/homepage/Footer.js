@@ -15,11 +15,11 @@ const Footer = () => {
             <div className="footer-container content-wrapper">
 
                 <div className="footer-content">
-                    <img src={restaurant} alt="restaurant" />
+                    <img src={restaurant} alt="Little Lemon seating area" />
 
                     <div className="footer-links-groups">
-                        {/* GROUP 1 ///////////////////////////// */}
-                        <div className="footer-links-group">
+                        {/* GROUP 1: GENERAL SITE NAV ///////////////////////////// */}
+                        <div className="footer-links-group" role="navigation" aria-label="Main">
                             <ul>
                                 {
                                     generalLinks.map((data, i) => {
@@ -35,8 +35,8 @@ const Footer = () => {
                             </ul>
                         </div>
 
-                        {/* GROUP 2 ///////////////////////////// */}
-                        <div className="footer-links-group">
+                        {/* GROUP 2: CONTACTS ///////////////////////////// */}
+                        <div className="footer-links-group" role="navigation" aria-label="Contacts">
                             <h4>contact</h4>
                             <ul>
                                 {
@@ -51,8 +51,8 @@ const Footer = () => {
                             </ul>
                         </div>
 
-                        {/* GROUP 3 ///////////////////////////// */}
-                        <div className="footer-links-group">
+                        {/* GROUP 3: SOCIALS ///////////////////////////// */}
+                        <div className="footer-links-group" role="navigation" aria-label="Socials">
                             <h4>social media</h4>
                             <ul>
                                 {
