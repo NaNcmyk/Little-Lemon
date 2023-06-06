@@ -41,8 +41,8 @@ const NavBarItems = ({ expanded, isDesktop, handleClick }) => {
                             }
                         </ul>
                         :
-                        <button className={(expanded & !isDesktop) ? "nav-menu-toggle active" : "nav-menu-toggle"} onClick={handleClick}>
-                            {expanded ? <CgClose /> : <CgMenu />}
+                        <button className={(expanded && !isDesktop) ? "nav-menu-toggle active" : "nav-menu-toggle"} onClick={handleClick}>
+                            {(expanded && !isDesktop) ? <CgClose /> : <CgMenu />}
                         </button>
                 }
             </div>
@@ -51,7 +51,7 @@ const NavBarItems = ({ expanded, isDesktop, handleClick }) => {
 }
 
 const Nav = () => {
-    const [isLargeScreen, setIsLargeScreen] = useState(false);
+    const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1200);
     const [expanded, setExpanded] = useState(false);
 
     const handleToggle = () => setExpanded(!expanded);
@@ -72,7 +72,7 @@ const Nav = () => {
     useEffect(() => {
         window.addEventListener("resize", isDesktop);
         return () => window.removeEventListener("resize", isDesktop);
-    });
+    }, [isLargeScreen]);
 
     // disable background scrolling while nav drawer is open
     useEffect(() => {
