@@ -117,7 +117,7 @@ P.S. Please excuse the "under construction" pages. It's not quite a full-fledged
 <br/>
 
 + 👍 **Are the semantics and responsiveness of the web app correct?**
-  + Re: semantics
+  + re: Semantics
     + Homepage
       + Landmark elements (`<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`) define its general structure
     + Booking Form
@@ -132,7 +132,7 @@ P.S. Please excuse the "under construction" pages. It's not quite a full-fledged
         + `<ul>` - used for unordered (navigation) lists, in conjunction with nested `<li>` tags, one for each child list item
         + `<article>` - used for standalone content within its parent `<section>` element
     + Open Graph `<meta>` tags are included in the `<head>` section of `index.html`
-  + Re: responsiveness
+  + re: Responsiveness
     + CSS media queries handled most of the heavy lifting.
     + Main nav bar - I used React's `useState` hook to track the current viewport width, and the `useEffect` hook to listen for any window `resize` events--a joint effort 🤝 resulting in a dynamic nav bar render based on screen size.
       + 🕵️‍♀️ Notice that the nav links of a bigger screen (size 1200px and up) change 🪄 to--*POOF! MAGIC!*--a ✨hamburger menu icon✨ when the screen size falls under 1200px.
@@ -145,12 +145,11 @@ P.S. Please excuse the "under construction" pages. It's not quite a full-fledged
 <br/>
 <br/>
 
-<div style="text-align: center">
-
+<div align="center">
   <i>One small step for front-end development, one giant leap for the World Wide Web.</i>
   <br/>
-
-  ![pic](./src/assets/finish-line.gif)
-  <p style="font-weight: bold; font-size: 2rem;">FINIS 🏁</p>
+  <br/>
+  <img width="70%" src="./src/assets/finish-line.gif">
+  <p style="font-size: 2rem; font-weight: bold;">FINIS 🏁</p>
 
 </div>
