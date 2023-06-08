@@ -31,6 +31,7 @@ const BookingSlots = ({ bookingData, initializeTimes }) => {
 
 const BookingForm = () => {
     const navigate = useNavigate();
+    const today = getTodaysDate();
 
     const [bookingData, dispatch] = useReducer(
         availableTimes,
@@ -39,7 +40,6 @@ const BookingForm = () => {
 
     const [form, setForm] = useState(() => {
         const form = JSON.parse(localStorage.getItem("form"));
-        const today = getTodaysDate();
         if (form) {
             // previously selected time may no longer be available
             // if unavailable - override localStorage empty string value to keep submit button disabled
@@ -211,6 +211,7 @@ const BookingForm = () => {
                         <input
                             data-testid="res-date"
                             id="res-date"
+                            min={today}
                             name="res-date"
                             onChange={handleDateChange}
                             type="date"
