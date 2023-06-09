@@ -177,8 +177,8 @@ P.S. Please excuse the "under construction" pages. It's not quite a full-fledged
   <i>One small step for front-end development, one giant leap for the World Wide Metaverse.</i>
   <br/>
   <br/>
-  <img width="70%" src="./src/assets/finish-line.gif">
 
-# FINIS 🏁
+  [<img width="70%" src="./src/assets/finish-line.gif">](https://coursera.org/share/f85f9a29d45aaf74ba76516579b25952)
 
-  </div>
+  <strong style="font-size: 2rem;">FINIS 🏁</strong>
+</div>
