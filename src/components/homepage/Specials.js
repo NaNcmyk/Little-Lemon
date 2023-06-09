@@ -1,5 +1,5 @@
 import greekSalad from "../../assets/greek_salad.jpg";
-import bruschetta from "../../assets/bruschetta.jpeg";
+import bruschetta from "../../assets/bruschetta.jpg";
 import dessert from "../../assets/dessert.jpg";
 import { Link } from "react-router-dom";
 
@@ -39,7 +39,7 @@ const Specials = () => {
                             return (
                                 <article key={dish} className="specials-card">
 
-                                    <img src={ img } alt={ dish } />
+                                    <img src={ img } alt={ dish } loading="lazy"/>
 
                                     <div className="specials-card-content">
                                         <div className="specials-card-heading">

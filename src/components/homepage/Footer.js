@@ -15,7 +15,7 @@ const Footer = () => {
             <div className="footer-container content-wrapper">
 
                 <div className="footer-content">
-                    <img src={restaurant} alt="Little Lemon seating area" />
+                    <img src={restaurant} alt="Little Lemon seating area" loading="lazy" />
 
                     <div className="footer-links-groups">
                         {/* GROUP 1: GENERAL SITE NAV ///////////////////////////// */}

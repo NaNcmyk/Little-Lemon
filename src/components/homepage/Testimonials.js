@@ -49,7 +49,7 @@ const Testimonials = () => {
                                             <p>{rating}</p>
                                         </div>
                                         <div>
-                                            <img src={img} alt="reviewer" />
+                                            <img src={img} alt="reviewer" loading="lazy"/>
                                             <p>{name}</p>
                                         </div>
                                         <div>

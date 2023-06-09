@@ -1,6 +1,6 @@
 import restaurant from "../assets/restaurant.jpg";
 import greekSalad from "../assets/greek_salad.jpg";
-import bruschetta from "../assets/bruschetta.jpeg";
+import bruschetta from "../assets/bruschetta.jpg";
 import chef from "../assets/chef2.jpg";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
