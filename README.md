@@ -26,7 +26,7 @@ P.S. Please excuse the "under construction" pages. It's not quite a full-fledged
 
 **ISSUE #1**
 + A `error:0308010C:digital envelope routines::unsupported` error showed up on my initial attempts to deploy the app on Vercel. After a lot of troubleshooting... Here's what finally worked:
-  + I upgraded `react-scripts` to version ^5.0.1--this change is reflected in the `package.json`.
+  + I upgraded `react-scripts` to **version ^5.0.1**--this change is reflected in the `package.json`.
   + After the upgrade, I removed the old `node_modules` folder and `package-lock.json` file, then reinstalled both.
   + The `react-scripts` upgrade alone didn't work--even though it resolved the issue for other people. So, additionally, in `package.json`, I updated the `scripts` property with the `--openssl-legacy-provider` flag, just for the `start` and `build` keys, as below:
 
@@ -36,11 +36,11 @@ P.S. Please excuse the "under construction" pages. It's not quite a full-fledged
   + I have since updated to **Node v.18.16.0**. You may have to do the same if want to run the files locally. Otherwise, running the `npm start` command will throw an "incompatibility" error.
 
 **ISSUE #2**
-+ Note to Self: Please check image file sizes before deployment! 😡🤬. 8.5MB-20.1MB 😲 are NOT an optimal file sizes 😭
++ Note to Self: Please check image file sizes before deployment! 😡🤬. 8.5MB-20.1MB 😲 are NOT optimal file sizes 😭
 + Not surprisingly, after deploying the app with Vercel 🥳🎉--oh, the fun continues!--I noticed a lag in image rendering on the homepage, which was not an issue when running the app locally... 🤔
 + Thanks to a little Photoshop magic, all of the previously 1MB+ images are now scaled down significantly.
 + This might be overkill for such a small app, but I added the `loading="lazy"` attribute to the `<img>` elements of the *Specials*, *Testimonials*, and *Footer* components (namely, the below-the-fold content that does not need to be loaded until the user scrolls the page).
-  + *About* component - The images for this component weren't lazy loaded because I created a separate route for it (even though it's just a subsection of the *Homepage*). When it is a standalone page outside of the *Homepage* component, all of its content, including its images, are critical for page rendering, so their loading shouldn't be delayed.
+  + *About* component - The images for this component weren't lazy loaded because I created a separate route for it (even though it's just a subsection of the *Homepage*). When it is a standalone page outside of the *Homepage* component, all of its content, including its images, are critical for page rendering, so image loading shouldn't be delayed.
 
 ---
 
@@ -159,7 +159,7 @@ P.S. Please excuse the "under construction" pages. It's not quite a full-fledged
         + `<img>` (complete with descriptive `alt` text!) - used for all images (that are not icons)
         + `<ul>` - used for unordered (navigation) lists, in conjunction with nested `<li>` tags, one for each child list item
         + `<article>` - used for standalone content within its parent `<section>` element
-    + Open Graph `<meta>` tags are included in the `<head>` section of `index.html` to help generate social media traffic to the site--or at the very least, control how the site's content is displayed on socials (vs. leaving it up to the whims of the platform bots).
+    + Open Graph `<meta>` tags are included in the `<head>` section of `index.html` to help generate social media traffic to the site--or at the very least, to control how the site's content is displayed on socials (vs. leaving it up to the whims of the platform bots).
   + re: Responsiveness
     + CSS media queries handled most of the heavy lifting.
     + Main nav bar - I used React's `useState` hook to track the current viewport width, and the `useEffect` hook to listen for any window `resize` events--a joint effort 🤝 resulting in a dynamic nav bar render based on screen size.
