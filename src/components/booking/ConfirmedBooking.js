@@ -63,7 +63,9 @@ const ConfirmedBooking = () => {
                     <Link to="/terms/#cancellation-policy">
                         cancellation policy
                     </Link>
-                    <a href="/under-construction">manage booking</a>
+                    <Link to="/under-construction/manage-booking">
+                        manage booking
+                    </Link>
                 </div>
 
             </div>
